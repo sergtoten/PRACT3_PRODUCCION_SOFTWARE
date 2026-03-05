@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ["main", "develop"]
+    branches: ["main"]
   pull_request:
-    branches: ["main", "develop"]
+    branches: ["main"]
 
 jobs:
   ci:
@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest mypy ruff
+          pip install pytest pytest-bdd mypy ruff
 
       # -------------------------
       # LINT
