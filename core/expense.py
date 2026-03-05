@@ -17,8 +17,7 @@ class Expense:
     expense_date: date
 
     def __post_init__(self):
-       
-    
+
         if self.title == "":
             raise EmptyTitleError("Nombre está vacío")
 

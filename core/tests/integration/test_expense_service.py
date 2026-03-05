@@ -90,7 +90,7 @@ def test_create_multiple_expenses_and_list():
     - Este test valida que la función de listado refleja fielmente todos los gastos registrados hasta el momento.
     """
     service = create_service()
-    service.create_expense(title="Pan", amount= 3, description="Mercado")
+    service.create_expense(title="Pan", amount=3, description="Mercado")
     service.create_expense(title="Leche", amount=4, description="Supermercado")
 
     expenses = service.list_expenses()
@@ -99,7 +99,6 @@ def test_create_multiple_expenses_and_list():
     assert "Pan" in titles
     assert "Leche" in titles
     assert len(expenses) == 2
-    
 
 
 def test_remove_expense_reduces_total():
@@ -148,6 +147,7 @@ def test_update_expense_partial_fields():
     assert expense[0].title == "Camiseta"
     assert expense[0].amount == 18
     assert expense[0].description == "Ropa"
+
 
 def test_total_amount_after_removal():
     """

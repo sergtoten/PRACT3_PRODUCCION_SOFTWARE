@@ -66,6 +66,7 @@ def test_get_by_id_returns_expense():
     assert found.amount == 15
     assert found.title == "Titulo_id"
 
+
 def test_get_by_id_returns_none_if_not_found():
     """
     Prueba que el método repo.get_by_id() retorna None cuando se consulta un id que no corresponde a ningún gasto guardado.
@@ -74,5 +75,5 @@ def test_get_by_id_returns_none_if_not_found():
     repo = InMemoryExpenseRepository()
 
     result = repo.get_by_id(100)
-    
+
     assert result is None
