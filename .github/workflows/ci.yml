@@ -1,53 +1,29 @@
-name: CI
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
 
-on:
-  push:
-    branches: ["main", "develop"]
-  pull_request:
-    branches: ["main", "develop"]
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.12"
 
-jobs:
-  ci:
-    runs-on: ubuntu-latest
+  - name: Install dependencies
+    run: |
+      python -m pip install --upgrade pip
+      pip install pytest mypy ruff
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  - name: Run lint (ruff)
+    run: |
+      ruff check .
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+  - name: Check formatting
+    run: |
+      ruff format --check .
 
-      - - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install pytest mypy ruff
+  - name: Run mypy
+    run: |
+      mypy .
 
-      # -------------------------
-      # LINT
-      # -------------------------
-      - name: Run lint (ruff)
-        run: |
-          ruff check .
-
-      # -------------------------
-      # FORMAT
-      # -------------------------
-      - name: Check formatting
-        run: |
-          ruff format --check .
-
-      # -------------------------
-      # MYPY
-      # -------------------------
-      - name: Run mypy
-        run: |
-          mypy .
-
-      # -------------------------
-      # TESTS
-      # -------------------------
-      - name: Run tests
-        run: |
-          pytest
+  - name: Run tests
+    run: |
+      pytest
